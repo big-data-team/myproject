@@ -8,6 +8,7 @@ def test_add_nums():
 def test_mult_nums():
     assert mult_nums(1, 20) == 20
     assert mult_nums(2, 2) == 4
+    assert mult_nums(2, -2) == -4
 
 
 if __name__ == "__main__":

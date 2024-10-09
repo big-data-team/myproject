@@ -1,0 +1,29 @@
+name: Build package
+on: [push]
+branches:
+  only:
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - name: Check out
+      uses: actions/checkout@v4
+    - name: Setup PDM
+      uses: pdm-project/setup-pdm@v4
+      with:
+        python-version: 3.9
+        cache: true
+
+    - name: Install tools
+      run: pdm install
+
+    - name: Build package
+      run: pdm build
+
+    - name: Upload Wheel
+      uses: actions/upload-artifact@v4
+      with:
+        name: myproject
+        path: dist/*.whl

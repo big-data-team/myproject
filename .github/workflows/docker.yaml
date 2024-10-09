@@ -1,0 +1,29 @@
+name: Build docker image
+on:
+  push:
+    branches:
+      - master
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v4
+    - name: Setup PDM
+      uses: pdm-project/setup-pdm@v4
+      with:
+        python-version: 3.9
+        cache: true
+
+    - name: Install tools
+      run: pdm install
+
+    - name: Build package
+      run: pdm build
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        tags: eadishchev/myproject

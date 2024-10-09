@@ -1,8 +1,8 @@
 name: Build package
-on: [push]
-branches:
-  only:
-    - main
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
